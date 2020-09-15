@@ -37,17 +37,15 @@ def factorial(n):
 def findshortestpath(stations,shortest_path):
     print("开始寻找所有节点之间的最短路径")
     s_size = len(stations)
-    for i in range(s_size):
-        for j in range(s_size):
-            if i == j:
-                continue
-            for k in range(s_size):
-                if k == j or k == i:
+    for k in range(s_size):
+        for i in range(s_size):
+            for j in range(s_size):
+                if i == j or k == i or k == j:
                     continue
                 if shortest_path[i][j] == 1:
                     break
-                if shortest_path[i][j] < (shortest_path[i][k] + shortest_path[j][k]) and shortest_path[i][
-                    k] != 10000 and shortest_path[j][k] != 10000:
+                if shortest_path[i][j] > (shortest_path[i][k] + shortest_path[j][k]) and shortest_path[i][k] != 10000 \
+                        and shortest_path[j][k] != 10000:
                     shortest_path[i][j] = shortest_path[i][k] + shortest_path[j][k]
                     shortest_path[j][i] = shortest_path[i][k] + shortest_path[j][k]
             print("%d和%d的最短路径查找完毕" % (i, j))
